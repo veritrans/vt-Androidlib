@@ -7,9 +7,5 @@ import android.test.InstrumentationTestCase;
  */
 public class VTWebTest extends InstrumentationTestCase {
 
-    public void testMock()  {
-        final int expected = 1;
-        final int reality = 5;
-        assertEquals(expected,reality);
-    }
+
 }

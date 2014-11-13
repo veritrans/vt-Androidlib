@@ -7,7 +7,7 @@ import id.co.veritrans.android.api.VTModel.VTWebTransaction;
  */
 public class VTJsonGenerator {
 
-    public static void GenerateVTWebJson(VTWebTransaction transaction){
-
+    public static String GenerateVTWebJson(VTWebTransaction transaction){
+        return null;
     }
 }
