@@ -28,11 +28,14 @@ public class VTDirectTest extends InstrumentationTestCase {
                 assertNotNull(token.toString(),token);
                 assertNotNull(token.getRedirect_url(),token.getRedirect_url());
                 assertNotNull(token.getToken_id(),token.getToken_id());
+
             }
 
             @Override
             public void onError(Exception error) {
+
                 assertTrue(error.getMessage(),false);
+
             }
 
 
@@ -59,7 +62,9 @@ public class VTDirectTest extends InstrumentationTestCase {
 
             @Override
             public void onError(Exception error) {
+
                 assertTrue(error.getMessage(),false);
+
             }
 
 

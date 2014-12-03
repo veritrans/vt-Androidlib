@@ -1,5 +1,8 @@
 package id.co.veritrans.android.api;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import org.apache.http.HttpResponse;
@@ -11,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.util.Objects;
 
 import id.co.veritrans.android.api.VTInterface.ITokenCallback;
 import id.co.veritrans.android.api.VTModel.VTCardDetails;
@@ -42,14 +46,28 @@ public class VTDirect extends VTBaseTransactionMethod {
     @Override
     public void getToken(ITokenCallback callback) {
         if(callback != null && getCard_details() != null){
+            String url = VTConfig.getTokenUrl() + getCard_details().getParamUrl();
+            new GetTokenAsync(callback).execute(url);
+        }
+    }
+
+    class GetTokenAsync extends AsyncTask<String,Void,Object>{
+
+        ITokenCallback callback;
+        public  GetTokenAsync(ITokenCallback callback){
+            this.callback = callback;
+        }
+
+        @Override
+        protected Object doInBackground(String... strings) {
+            String url = strings[0];
             try {
-                String url = VTConfig.getTokenUrl() + getCard_details().getParamUrl();
                 URI uri = URI.create(url);
                 HttpGet httpRequest = new HttpGet(uri);
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpResponse response = httpClient.execute(httpRequest);
                 BufferedReader reader = new BufferedReader(
-                  new InputStreamReader(response.getEntity().getContent(),"UTF-8")
+                        new InputStreamReader(response.getEntity().getContent(),"UTF-8")
                 );
                 String line = null;
                 StringBuilder sb = new StringBuilder();
@@ -62,20 +80,31 @@ public class VTDirect extends VTBaseTransactionMethod {
                 Gson gson = new Gson();
                 VTToken token = gson.fromJson(json,VTToken.class);
                 if(token.getStatus_code() == 200){
-                    callback.onSuccess(token);
+                    return token;
                 }else{
-                    throw new Exception(token.getStatus_message());
+                    return new Exception(token.getStatus_message());
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
-                callback.onError(e);
+                return e;
             } catch (IllegalArgumentException e){
                 e.printStackTrace();
-                callback.onError(e);
+                return e;
             } catch (Exception e){
                 e.printStackTrace();
-                callback.onError(e);
+                return e;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Object obj) {
+            if(obj instanceof VTToken){
+                VTToken token = (VTToken)obj;
+                callback.onSuccess(token);
+            }else if(obj instanceof Exception){
+                Exception ex = (Exception)obj;
+                callback.onError(ex);
             }
         }
     }
