@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VTAndroidAPI/VTAndroidAPI.iml" filepath="$PROJECT_DIR$/VTAndroidAPI/VTAndroidAPI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/VeritransLib.iml" filepath="$PROJECT_DIR$/VeritransLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vtandroidlib.iml" filepath="$PROJECT_DIR$/vtandroidlib.iml" />
     </modules>
   </component>
 </project>
