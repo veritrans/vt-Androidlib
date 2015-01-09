@@ -22,10 +22,23 @@ public class VTCardDetailsTest extends InstrumentationTestCase {
                 "&card_cvv=123" +
                 "&client_key="+VTConfig.CLIENT_KEY +
                 "&secure=true" +
-                "&bank=bni" +
                 "&gross_amount=1000000";
         assertNotNull(url);
         assertEquals(testUrl,url);
+
+        cardDetails.setBank("bni");
+        //test with bank
+        String urlWithBank = VTConfig.getTokenUrl() + cardDetails.getParamUrl();
+        String testUrlWithBank = VTConfig.getTokenUrl()+
+                "?card_number=4811111111111114" +
+                "&card_exp_month=1" +
+                "&card_exp_year=2020" +
+                "&card_cvv=123" +
+                "&client_key="+VTConfig.CLIENT_KEY +
+                "&secure=true" +
+                "&bank=bni" +
+                "&gross_amount=1000000";
+        assertEquals(urlWithBank,testUrlWithBank);
     }
 
     public static VTCardDetails CardFactory(boolean secure){

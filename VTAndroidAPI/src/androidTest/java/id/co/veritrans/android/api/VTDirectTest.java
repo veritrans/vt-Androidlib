@@ -1,6 +1,7 @@
 package id.co.veritrans.android.api;
 
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -25,7 +26,7 @@ public class VTDirectTest extends InstrumentationTestCase {
         vtDirect.getToken(new ITokenCallback() {
             @Override
             public void onSuccess(VTToken token) {
-                assertNotNull(token.toString(),token);
+                assertNotNull(token.toString(), token);
                 assertNotNull(token.getRedirect_url(),token.getRedirect_url());
                 assertNotNull(token.getToken_id(),token.getToken_id());
 

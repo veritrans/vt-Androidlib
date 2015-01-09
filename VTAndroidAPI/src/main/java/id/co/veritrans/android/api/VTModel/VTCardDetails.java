@@ -15,7 +15,7 @@ public class VTCardDetails {
     private String card_cvv;
 
     private boolean secure;
-    private String bank = "bni";
+    private String bank = null;
     private String gross_amount;
 
     public String getCard_number() {
@@ -81,7 +81,14 @@ public class VTCardDetails {
                 + "&card_cvv="+card_cvv
                 + "&client_key="+ VTConfig.CLIENT_KEY
                 + "&secure="+Boolean.toString(secure)
-                + "&bank=bni"
+                + getBankParam()
                 + "&gross_amount="+gross_amount;
+    }
+
+    public String getBankParam(){
+        if(bank != null){
+            return "&bank="+bank;
+        }
+        return "";
     }
 }
