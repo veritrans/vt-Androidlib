@@ -2,8 +2,8 @@
     package="id.co.veritrans.android.api">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <application android:allowBackup="true"
->
+    <uses-sdk android:minSdkVersion="14"  />
+    <application android:allowBackup="true">
 
     </application>
 
