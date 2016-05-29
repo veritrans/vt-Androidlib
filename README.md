@@ -1,3 +1,3 @@
 # vt-Androidlib
 
-### *We are in the process of depricating this SDK, and will be publishing our latest SDK Soon. Please contact support@veritrans.co.id for more information*
+### *This SDK is Deprecated by [Latest Android SDK](https://github.com/veritrans/veritrans-android) Please look there*. If you need any support with the old sdk please contact support@veritrans.co.id
